@@ -32,6 +32,18 @@ public class Lane {
             cars.add(new Car("car" + totalCar++,laneName, time));
         }
     }
+    public boolean addOrNot() {
+        Random random = new Random();
+        double generatedProbablity = random.nextDouble();
+        if (generatedProbablity < this.probablityToAdd) {
+            System.out.print("Probability at " + laneName + ": " + new DecimalFormat("#.##").format(generatedProbablity) + " < " + this.probablityToAdd);
+
+            return true;
+
+        } else {
+            return false;
+        }
+    }
     public void addCar(int time) {
 
         if (addOrNot()){
