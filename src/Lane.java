@@ -4,9 +4,7 @@ import java.util.*;
 public class Lane {
     String laneName;
     LinkedList<Car> cars = new LinkedList<>();
-    Boolean trafficLightIsGreen;
     double probablityToAdd;
-    double probablityToRemove;
     int totalCar = 0;
 
 
@@ -24,38 +22,26 @@ public class Lane {
         this.laneName = laneName;
     }
 
-    public Boolean getTrafficLightIsGreen() {
-        return trafficLightIsGreen;
-    }
-
-    public void setTrafficLightIsGreen(Boolean trafficLightIsGreen) {
-        this.trafficLightIsGreen = trafficLightIsGreen;
-    }
-
     public LinkedList<Car> getCars() {
         return cars;
     }
-    public int getTotalCar() {
-        return totalCar;
-    }
-    public void addCar(String laneName) {
+    public void addCar(String laneName, int time) {
         Random random = new Random();
         double generatedProbablity = random.nextDouble();
         if (generatedProbablity < this.probablityToAdd) {
-            cars.add(new Car("car" + totalCar++,laneName));
+            cars.add(new Car("car" + totalCar++,laneName, time));
         }
     }
-    public void addCar() {
-        Random random = new Random();
-        double generatedProbablity = random.nextDouble();
-        System.out.print("Probability at " + laneName + ": " + new DecimalFormat("#.##").format(generatedProbablity) + " < " + this.probablityToAdd);
-        if (generatedProbablity < this.probablityToAdd) {
-            cars.add(new Car("car" + totalCar++,this.laneName));
+    public void addCar(int time) {
+
+        if (addOrNot()){
+            cars.add(new Car("car" + totalCar++,this.laneName, time));
             System.out.print(" ✔");
         }
         System.out.println();
 
     }
+
     public void addCar(Car car) {
         cars.add(car);
     }
@@ -74,15 +60,5 @@ public class Lane {
             return false;
         }
     }
-    public Map<String,List<String >> carsList() {
-        Map<String, List<String>> result = new HashMap<>();
-        List<String> a = new LinkedList<>();
-        for (int i = 0; i < cars.size();i++) {
-            a.add(cars.get(i).carName);
-        }
-        result.put(this.laneName,a);
-        return result;
-    }
-
 
 }
