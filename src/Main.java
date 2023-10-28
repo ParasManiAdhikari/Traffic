@@ -24,7 +24,9 @@ public class Main {
         if (A3.getCars().size() == 3) {
             if (A3.addOrNot()){
                 GoToA2(A3.laneName,time);
-            }        } else {
+            }
+            System.out.println();
+        } else {
             A3.addCar(time);
         }
     }

@@ -37,15 +37,14 @@ public class Lane {
         double generatedProbablity = random.nextDouble();
         if (generatedProbablity < this.probablityToAdd) {
             System.out.print("Probability at " + laneName + ": " + new DecimalFormat("#.##").format(generatedProbablity) + " < " + this.probablityToAdd);
-
             return true;
-
         } else {
+            System.out.print("Probability at " + laneName + ": " + new DecimalFormat("#.##").format(generatedProbablity) + " < " + this.probablityToAdd);
             return false;
         }
     }
-    public void addCar(int time) {
 
+    public void addCar(int time) {
         if (addOrNot()){
             cars.add(new Car("car" + totalCar++,this.laneName, time));
             System.out.print(" ✔");
