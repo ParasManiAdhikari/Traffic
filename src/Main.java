@@ -18,6 +18,21 @@ public class Main {
             removeCars(time);       //
             printLanes();           //
         }
+
+        int a1 = getDwellTimes(A1);
+        System.out.println("A1 : " + A1.exitedCars);
+        System.out.println("A2 : " + A2.exitedCars);
+        System.out.println("A3 : " + A3.exitedCars);
+    }
+
+    private static int getDwellTimes(Lane lane) {
+        int LaneDwellTimeSum = 0;
+        for(Car car : lane.exitedCars){
+            int dwellTime = car.exitTime - car.enterTime;
+            LaneDwellTimeSum += dwellTime;
+        }
+        int averageDwellTime = LaneDwellTimeSum / lane.exitedCars.size();
+        return averageDwellTime;
     }
 
     public static void addToA3(int time) {
@@ -95,15 +110,15 @@ public class Main {
     private static void removeCars(int time) {
         System.out.println("\n*---- Removing Cars ----*");
         if (time < 39) {
-            A1.removeCar();
+            A1.removeCar(time);
             if (time < 10) {
                 if (A3.getCars().size() < 3) { // A3 is not full
-                    A3.removeCar();
-                    A2.removeCar();
+                    A3.removeCar(time);
+                    A2.removeCar(time);
                 } else { // A3 is full
-                    if (A3.removeCar()) { // in Case When a car from A3 is removed
+                    if (A3.removeCar(time)) { // in Case When a car from A3 is removed
                         if (A2.getCars().size() <= 3) { // In Case size of A2 is less than 3 or equal to  3
-                            A2.removeCar();
+                            A2.removeCar(time);
                         } else { // in Case size is greater than 3
                             removeFromA2(time);
                         }
@@ -124,14 +139,14 @@ public class Main {
                     } else {
                         removeFromA2(time);
                     }
-                    C1.removeCar();
-                    C2.removeCar();
+                    C1.removeCar(time);
+                    C2.removeCar(time);
                 }
             }
         } else {
             if (43 <= time && time < 55) {
-                B.removeCar();
-                D.removeCar();
+                B.removeCar(time);
+                D.removeCar(time);
             }
         }
         System.out.println();
@@ -139,19 +154,19 @@ public class Main {
 
     public static void removeFromA2(int time) {
         if (A2.getCars().size() <= 3) {
-            A2.removeCar();
+            A2.removeCar(time);
         } else {
             if (A2.getCars().get(3).whichLane.equals(A3.laneName)) { // if in A2 lane at index 3 there is car waiting to go to A3
                 if (A2.getCars().get(2).whichLane.isEmpty()) {       // and if infront of this car there is no car
                     A3.addCar(A2.getCars().remove(3));        // then add this car to lane A3
                     removeFromA2WhenA3Full(time);
                 } else {
-                    if (A2.removeCar()) {                                     // if a car is removed from A2
+                    if (A2.removeCar(time)) {                                     // if a car is removed from A2
                         A2.getCars().add(2, new Car("", "", time)); // and make space by stopping the waiting car at position 4
                     }
                 }
             } else { // if there is no car waiting to change the lane to A3 then simply remove a car from A2.
-                A2.removeCar();
+                A2.removeCar(time);
             }
         }
 
@@ -159,14 +174,14 @@ public class Main {
 
     public static void removeFromA2WhenA3Full(int time) {
         if (A2.getCars().size() <= 3) {
-            A2.removeCar();
+            A2.removeCar(time);
         } else {
             if (A2.getCars().get(3).whichLane.equals(A3.laneName)) {              // if there is car waiting to go to A3
-                if (A2.removeCar()) {                                               // if a car is removed from A2
+                if (A2.removeCar(time)) {                                               // if a car is removed from A2
                     A2.getCars().add(2, new Car("", "", time));     // then make space by stopping the waiting car at position 4
                 }
             } else {                                                               // if no car is waiting at position 4
-                A2.removeCar();                                                     // then just remove the first car.
+                A2.removeCar(time);                                                     // then just remove the first car.
             }
         }
     }

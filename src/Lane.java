@@ -4,6 +4,7 @@ import java.util.*;
 public class Lane {
     String laneName;
     LinkedList<Car> cars = new LinkedList<>();
+    LinkedList<Car> exitedCars = new LinkedList<>();
     double probablityToAdd;
     int totalCar = 0;
 
@@ -56,7 +57,7 @@ public class Lane {
     public void addCar(Car car) {
         cars.add(car);
     }
-    public boolean removeCar() {
+    public boolean removeCar(int time) {
         Random random = new Random();
         double generatedProbablity = random.nextDouble();
         if(cars.isEmpty()){
@@ -64,7 +65,11 @@ public class Lane {
             return false;
         }
         else if (generatedProbablity < 0.50) {
-            System.out.println(laneName + " REMOVED " + cars.poll());
+            Car toDelete = cars.poll();
+            toDelete.exitTime = time;
+            exitedCars.add(toDelete);
+            System.out.println("CHECKING EXITED LIST : " + exitedCars);
+            System.out.println(laneName + " REMOVED " + toDelete);
             return true;
         } else {
             System.out.println(laneName + " Remove Probability False");
