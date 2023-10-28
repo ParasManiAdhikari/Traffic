@@ -10,7 +10,7 @@ public class Main {
     private static final Lane D = new Lane("D1", 0.07);
 
     public static void main(String[] args) {
-        for (int time = 0; time < 3600; time++) {
+        for (int time = 0; time < 120; time++) {
             System.out.println("\n-------------------- SECOND " + time + " --------------------");
             addNewRandomCar(time);      //
             printLanes();           //
@@ -112,7 +112,7 @@ public class Main {
     }
 
     private static void removeCars(int time) {
-        int timeModulo60 = time%60;
+        int timeModulo60 = time%60;  // Modulo of 60 for case distinction
         System.out.println("\n*---- Removing Cars ----*");
         if (timeModulo60 < 39) {
             A1.removeCar(time);
