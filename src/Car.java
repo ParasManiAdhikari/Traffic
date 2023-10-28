@@ -5,9 +5,10 @@ public class Car {
     int enterTime;
     int exitTime;
 
-    public Car(String carName,String whichLane, double enterTime) {
+    public Car(String carName,String whichLane, int enterTime) {
         this.carName = carName;
         this.whichLane = whichLane;
+        this.enterTime = enterTime;
     }
 
     public String getCarName() {

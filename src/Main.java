@@ -10,8 +10,7 @@ public class Main {
     private static final Lane D = new Lane("D1", 0.07);
 
     public static void main(String[] args) {
-
-        for (int time = 0; time < 60; time++) {
+        for (int time = 0; time < 3600; time++) {
             System.out.println("\n-------------------- SECOND " + time + " --------------------");
             addNewRandomCar(time);      //
             printLanes();           //
@@ -19,18 +18,23 @@ public class Main {
             printLanes();           //
         }
 
-        int a1 = getDwellTimes(A1);
+        System.out.println("----------------- DWELL TIME -------------");
         System.out.println("A1 : " + A1.exitedCars);
+        System.out.println("DWELL TIME OF A1: " + getDwellTimes(A1) + "\n");
         System.out.println("A2 : " + A2.exitedCars);
+        System.out.println("DWELL TIME OF A2: " + getDwellTimes(A2)+ "\n");
         System.out.println("A3 : " + A3.exitedCars);
+        System.out.println("DWELL TIME OF A3: " + getDwellTimes(A3)+ "\n");
     }
 
     private static int getDwellTimes(Lane lane) {
         int LaneDwellTimeSum = 0;
         for(Car car : lane.exitedCars){
             int dwellTime = car.exitTime - car.enterTime;
+            System.out.print(dwellTime + " | ");
             LaneDwellTimeSum += dwellTime;
         }
+        System.out.println();
         int averageDwellTime = LaneDwellTimeSum / lane.exitedCars.size();
         return averageDwellTime;
     }
@@ -108,10 +112,11 @@ public class Main {
     }
 
     private static void removeCars(int time) {
+        int timeModulo60 = time%60;
         System.out.println("\n*---- Removing Cars ----*");
-        if (time < 39) {
+        if (timeModulo60 < 39) {
             A1.removeCar(time);
-            if (time < 10) {
+            if (timeModulo60 < 10) {
                 if (A3.getCars().size() < 3) { // A3 is not full
                     A3.removeCar(time);
                     A2.removeCar(time);
@@ -127,7 +132,7 @@ public class Main {
                     }
                 }
             } else {
-                if (time < 14) {
+                if (timeModulo60 < 14) {
                     if (A3.getCars().size() == 3) {
                         removeFromA2WhenA3Full(time);
                     } else {
@@ -144,7 +149,7 @@ public class Main {
                 }
             }
         } else {
-            if (43 <= time && time < 55) {
+            if (43 <= timeModulo60 && timeModulo60 < 55) {
                 B.removeCar(time);
                 D.removeCar(time);
             }

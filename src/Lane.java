@@ -67,6 +67,7 @@ public class Lane {
         else if (generatedProbablity < 0.50) {
             Car toDelete = cars.poll();
             toDelete.exitTime = time;
+            System.out.println("DWELL TIME FOR " + toDelete.carName + " : " + toDelete.exitTime + "-" + toDelete.enterTime);
             exitedCars.add(toDelete);
             System.out.println("CHECKING EXITED LIST : " + exitedCars);
             System.out.println(laneName + " REMOVED " + toDelete);
