@@ -51,7 +51,6 @@ public class Main {
             saveRemainingCars();
             resetLanes();                    // Resets Lanes for next Simulation
         }
-        System.out.println("SIZE OF A3: " + sizeOfA3);
         printAllAverageDwellTimes();
         //            System.out.println("----------------- DWELL TIME -------------");
 //            System.out.println("A1 : " + A1.exitedCars);
@@ -260,7 +259,7 @@ public class Main {
                         A2.removeCar(time);
                     }
                 }
-            } else if(timeModulo60 < 14) {
+            } else if(timeModulo60 > 14) {
                 C1.removeCar(time);
                 C2.removeCar(time);
             }
