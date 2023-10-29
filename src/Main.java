@@ -120,19 +120,19 @@ public class Main {
 
     private static void printAllAverageDwellTimes() {
         System.out.println("\nANSWERS: \n1a) --------------- DWELL TIME");
-        System.out.print(dwellA1);
+//        System.out.print(dwellA1);
         System.out.println(" | Average :" + calculateAverage(dwellA1));
-        System.out.print(dwellA2);
+//        System.out.print(dwellA2);
         System.out.println(" | Average :" + calculateAverage(dwellA2));
-        System.out.print(dwellA3);
+//        System.out.print(dwellA3);
         System.out.println(" | Average :" + calculateAverage(dwellA3));
-        System.out.print(dwellB1);
+//        System.out.print(dwellB1);
         System.out.println(" | Average :" + calculateAverage(dwellB1));
-        System.out.print(dwellC1);
+//        System.out.print(dwellC1);
         System.out.println(" | Average :" + calculateAverage(dwellC1));
-        System.out.print(dwellC2);
+//        System.out.print(dwellC2);
         System.out.println(" | Average :" + calculateAverage(dwellC2));
-        System.out.print(dwellD1);
+//        System.out.print(dwellD1);
         System.out.println(" | Average :" + calculateAverage(dwellD1));
     }
 
@@ -222,31 +222,17 @@ public class Main {
         int timeModulo60 = time%60;  // Modulo of 60 for case distinction
         System.out.println("\n*---- Removing Cars ----*");
         if (timeModulo60 < 39) {
-            A1.removeCar(time);
-            // A2
-            if (A2.getCars().size() <= sizeOfA3) {
-                A2.removeCar(time);
+            A1.removeCar(time);                          // try to remove a car from A1
+            tryToRemoveFromA2(time);
+            if (timeModulo60 < 10) {                    // this will run only for ten seconds
+                A3.removeCar(time);                     // try to remove from A3
+                tryToRemoveFromA2(time);
             } else {
-                if (A2.getCars().get(sizeOfA3).whichLane.equals(A3.laneName)){
-                    removeFromA2(time);
-                } else {
-                    A2.removeCar(time);
+                if (timeModulo60 >= 14)   {            // this will run from 14 to 39 second
+                    C1.removeCar(time);
+                    C2.removeCar(time);
+
                 }
-            }
-            if (timeModulo60 < 10) {
-                A3.removeCar(time);
-                if (A2.getCars().size() <= sizeOfA3) {
-                    A2.removeCar(time);
-                } else {
-                    if (A2.getCars().get(sizeOfA3 ).whichLane.equals(A3.laneName)){
-                        removeFromA2(time);
-                    } else {
-                        A2.removeCar(time);
-                    }
-                }
-            } else if(timeModulo60 > 14) {
-                C1.removeCar(time);
-                C2.removeCar(time);
             }
         } else {
             if (43 <= timeModulo60 && timeModulo60 < 55) {
