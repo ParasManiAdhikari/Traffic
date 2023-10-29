@@ -1,11 +1,5 @@
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
-public class test {
+public class Test {
     public static void main(String[] args) {
-
-
         // TO SEE DWELL TIMES IN ONE SIMULATION
 //            System.out.println("----------------- DWELL TIME -------------");
 //            System.out.println("A1 : " + A1.exitedCars);
