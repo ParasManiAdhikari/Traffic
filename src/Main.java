@@ -184,12 +184,6 @@ public class Main {
         }
     }
 
-
-
-
-
-
-
     private static void addToA2(int time) {                     // this method add an element of A2 to either A2 or A1
         if (A2.getCars().size() <= A1.getCars().size()) {       // based on smaller size of the lane
             A2.addCar(time);
