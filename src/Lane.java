@@ -71,6 +71,7 @@ public class Lane {
             System.out.println(laneName + " REMOVED " + toDelete);
             System.out.println(laneName + " EXITED CARS LIST : " + exitedCars);
             System.out.println(laneName + " DWELL TIME FOR " + toDelete.carName + " : " + toDelete.exitTime + "-" + toDelete.enterTime);
+            this.totalCar--;
             return true;
         } else {
             System.out.println(laneName + " Remove Probability False");
