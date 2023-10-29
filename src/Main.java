@@ -51,6 +51,7 @@ public class Main {
             saveRemainingCars();
             resetLanes();                    // Resets Lanes for next Simulation
         }
+        System.out.println("SIZE OF A3: " + sizeOfA3);
         printAllAverageDwellTimes();
         //            System.out.println("----------------- DWELL TIME -------------");
 //            System.out.println("A1 : " + A1.exitedCars);
@@ -72,25 +73,25 @@ public class Main {
 //            System.out.println("TOTAL CARS C1: " + C1.totalCar);
 //            System.out.println("TOTAL CARS C2: " + C2.totalCar);
 //            System.out.println("TOTAL CARS D1: " + D1.totalCar);
-//        printAllAverageRemainingCars();
+        printAllAverageRemainingCars();
 
     }
 
     private static void printAllAverageRemainingCars(){
         System.out.println("1b) --------------- Remaining Cars");
-        System.out.println("Remaining cars at A1 :" + remainingCarsA1);
+//        System.out.println("Remaining cars at A1 :" + remainingCarsA1);
         System.out.println("Average: " + calculateAverage(remainingCarsA1));
-        System.out.println("Remaining cars at A2 :" + remainingCarsA2);
+//        System.out.println("Remaining cars at A2 :" + remainingCarsA2);
         System.out.println("Average: " + calculateAverage(remainingCarsA2));
-        System.out.println("Remaining cars at A3 :" + remainingCarsA3);
+//        System.out.println("Remaining cars at A3 :" + remainingCarsA3);
         System.out.println("Average: " + calculateAverage(remainingCarsA3));
-        System.out.println("Remaining cars at B1 :" + remainingCarsB1);
+//        System.out.println("Remaining cars at B1 :" + remainingCarsB1);
         System.out.println("Average: " + calculateAverage(remainingCarsB1));
-        System.out.println("Remaining cars at C1 :" + remainingCarsC1);
+//        System.out.println("Remaining cars at C1 :" + remainingCarsC1);
         System.out.println("Average: " + calculateAverage(remainingCarsC1));
-        System.out.println("Remaining cars at C2 :" + remainingCarsC2);
+//        System.out.println("Remaining cars at C2 :" + remainingCarsC2);
         System.out.println("Average: " + calculateAverage(remainingCarsC2));
-        System.out.println("Remaining cars at D1 :" + remainingCarsD1);
+//        System.out.println("Remaining cars at D1 :" + remainingCarsD1);
         System.out.println("Average: " + calculateAverage(remainingCarsD1));
 
     }
@@ -139,20 +140,20 @@ public class Main {
     }
 
     private static void printAllAverageDwellTimes() {
-        System.out.println("\nANSWERS: 1a) --------------- DWELL TIME");
-        System.out.print(dwellA1);
+        System.out.println("\nANSWERS: \n1a) --------------- DWELL TIME");
+//        System.out.print(dwellA1);
         System.out.println(" | Average :" + calculateAverage(dwellA1));
-        System.out.print(dwellA2);
+//        System.out.print(dwellA2);
         System.out.println(" | Average :" + calculateAverage(dwellA2));
-        System.out.print(dwellA3);
+//        System.out.print(dwellA3);
         System.out.println(" | Average :" + calculateAverage(dwellA3));
-        System.out.print(dwellB1);
+//        System.out.print(dwellB1);
         System.out.println(" | Average :" + calculateAverage(dwellB1));
-        System.out.print(dwellC1);
+//        System.out.print(dwellC1);
         System.out.println(" | Average :" + calculateAverage(dwellC1));
-        System.out.print(dwellC2);
+//        System.out.print(dwellC2);
         System.out.println(" | Average :" + calculateAverage(dwellC2));
-        System.out.print(dwellD1);
+//        System.out.print(dwellD1);
         System.out.println(" | Average :" + calculateAverage(dwellD1));
     }
 
@@ -242,7 +243,7 @@ public class Main {
             if (A2.getCars().size() <= sizeOfA3) {
                 A2.removeCar(time);
             } else {
-                if (A2.getCars().get(3).whichLane.equals(A3.laneName)){
+                if (A2.getCars().get(sizeOfA3).whichLane.equals(A3.laneName)){
                     removeFromA2(time);
                 } else {
                     A2.removeCar(time);
@@ -253,7 +254,7 @@ public class Main {
                 if (A2.getCars().size() <= sizeOfA3) {
                     A2.removeCar(time);
                 } else {
-                    if (A2.getCars().get(3).whichLane.equals(A3.laneName)){
+                    if (A2.getCars().get(sizeOfA3 ).whichLane.equals(A3.laneName)){
                         removeFromA2(time);
                     } else {
                         A2.removeCar(time);
@@ -273,19 +274,21 @@ public class Main {
     }
 
     public static void removeFromA2(int time) {
-        if (A2.getCars().get(3).whichLane.equals(A3.laneName)) {                        // if in A2 lane at index 3 there is car waiting to go to A3
-            if (A2.getCars().get(2).whichLane.isEmpty()) {                               // then add this car to lane A3
-                if (A3.getCars().size() < sizeOfA3) {
-                    A3.addCar(A2.getCars().remove(3));
-                }
-                if (A2.getCars().size() == sizeOfA3) {
-                    removeFromA2(time);
+        if(A2.getCars().size() > sizeOfA3){
+            if (A2.getCars().get(sizeOfA3).whichLane.equals(A3.laneName)) {                        // if in A2 lane at index 3 there is car waiting to go to A3
+                if (A2.getCars().get(sizeOfA3).whichLane.isEmpty()) {                               // then add this car to lane A3
+                    if (A3.getCars().size() < sizeOfA3) {
+                        A3.addCar(A2.getCars().remove(3));
+                    }
+                    if (A2.getCars().size() == sizeOfA3) {
+                        removeFromA2(time);
+                    } else {
+                        A2.removeCar(time);
+                    }
                 } else {
-                    A2.removeCar(time);
-                }
-            } else {
-                if (A2.removeCar(time)) {                                                      // if a car is removed from A2
-                    A2.getCars().add(2, new Car("Empty", "", time));        // then make space by stopping the waiting car at position 4
+                    if (A2.removeCar(time)) {                                                      // if a car is removed from A2
+                        A2.getCars().add(2, new Car("Empty", "", time));        // then make space by stopping the waiting car at position 4
+                    }
                 }
             }
         }
