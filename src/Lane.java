@@ -8,6 +8,8 @@ public class Lane {
     double probablityToAdd;
     int totalCar = 0;
 
+    int carNumber = 0;
+
 
     // Constructor
     public Lane(String laneName,double probablity) {
@@ -30,7 +32,8 @@ public class Lane {
         Random random = new Random();
         double generatedProbablity = random.nextDouble();
         if (generatedProbablity < this.probablityToAdd) {
-            cars.add(new Car("car" + totalCar++,laneName, time));
+            cars.add(new Car("car" + carNumber++,laneName, time));
+            totalCar++;
         }
     }
     public boolean addOrNot() {
@@ -47,7 +50,8 @@ public class Lane {
 
     public void addCar(int time) {
         if (addOrNot()){
-            cars.add(new Car("car" + totalCar++,this.laneName, time));
+            cars.add(new Car("car" + carNumber++,this.laneName, time));
+            totalCar++;
             System.out.print(" ✔");
         }
         System.out.println();
@@ -66,12 +70,14 @@ public class Lane {
         }
         else if (generatedProbablity < 0.50) {
             Car toDelete = cars.poll();
-            toDelete.exitTime = time;
-            exitedCars.add(toDelete);
-            System.out.println(laneName + " REMOVED " + toDelete);
-            System.out.println(laneName + " EXITED CARS LIST : " + exitedCars);
-            System.out.println(laneName + " DWELL TIME FOR " + toDelete.carName + " : " + toDelete.exitTime + "-" + toDelete.enterTime);
-            this.totalCar--;
+            if(!toDelete.carName.equals("Empty")){
+                toDelete.exitTime = time;
+                exitedCars.add(toDelete);
+                System.out.println(laneName + " REMOVED " + toDelete);
+                System.out.println(laneName + " EXITED CARS LIST : " + exitedCars);
+                System.out.println(laneName + " DWELL TIME FOR " + toDelete.carName + " : " + toDelete.exitTime + "-" + toDelete.enterTime);
+                this.totalCar--;
+            }
             return true;
         } else {
             System.out.println(laneName + " Remove Probability False");

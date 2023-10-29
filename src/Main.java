@@ -24,6 +24,8 @@ public class Main {
         List<Integer> dwellD1 = new ArrayList<>();
 
         for (int k = 0; k < 30; k++){
+
+            // 1 SIMULATION
             for (int time = 0; time < 120; time++) {
                 System.out.println("\n-------------------- SECOND " + time + " --------------------");
                 addNewRandomCar(time);      //
@@ -234,12 +236,12 @@ public class Main {
         if (A2.getCars().size() <= sizeOfA3) {
             A2.removeCar(time);
         } else {
-            if (A2.getCars().get(3).whichLane.equals(A3.laneName)) { // if in A2 lane at index 3 there is car waiting to go to A3
-                if (A2.getCars().get(2).whichLane.isEmpty()) {       // and if infront of this car there is no car
-                    A3.addCar(A2.getCars().remove(3));        // then add this car to lane A3
+            if (A2.getCars().get(3).whichLane.equals(A3.laneName)) {                        // if in A2 lane at index 3 there is car waiting to go to A3
+                if (A2.getCars().get(2).whichLane.isEmpty()) {                              // and if infront of this car there is no car
+                    A3.addCar(A2.getCars().remove(3));                                // then add this car to lane A3
                     removeFromA2WhenA3Full(time);
                 } else {
-                    if (A2.removeCar(time)) {                                     // if a car is removed from A2
+                    if (A2.removeCar(time)) {                                               // if a car is removed from A2
                         A2.getCars().add(2, new Car("", "", time)); // and make space by stopping the waiting car at position 4
                     }
                 }
@@ -254,12 +256,12 @@ public class Main {
         if (A2.getCars().size() <= sizeOfA3) {
             A2.removeCar(time);
         } else {
-            if (A2.getCars().get(3).whichLane.equals(A3.laneName)) {              // if there is car waiting to go to A3
-                if (A2.removeCar(time)) {                                               // if a car is removed from A2
-                    A2.getCars().add(2, new Car("", "", time));     // then make space by stopping the waiting car at position 4
+            if (A2.getCars().get(3).whichLane.equals(A3.laneName)) {                           // if there is car waiting to go to A3
+                if (A2.removeCar(time)) {                                                      // if a car is removed from A2
+                    A2.getCars().add(2, new Car("", "", time));        // then make space by stopping the waiting car at position 4
                 }
-            } else {                                                               // if no car is waiting at position 4
-                A2.removeCar(time);                                                     // then just remove the first car.
+            } else {                                                                           // if no car is waiting at position 4
+                A2.removeCar(time);                                                            // then just remove the first car.
             }
         }
     }
