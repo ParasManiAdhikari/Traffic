@@ -244,10 +244,10 @@ public class Main {
     }
     public static void removeFromA2(int time) {
         if (A2.getCars().size() > sizeOfA3) {
-            if (A2.getCars().get(3).whichLane.equals(A3.laneName)) {    // if there is car waiting at position 3 to go to A3
-                if (A2.getCars().get(2).whichLane.isEmpty()) {        // and before it there is space
+            if (A2.getCars().get(sizeOfA3).whichLane.equals(A3.laneName)) {    // if there is car waiting at position 3 to go to A3
+                if (A2.getCars().get(sizeOfA3).whichLane.isEmpty()) {        // and before it there is space
                     if (A3.getCars().size() < sizeOfA3) {             // and A3 is not full
-                        A3.addCar(A2.getCars().remove(3));      // then remove from A2 and add to A3
+                        A3.addCar(A2.getCars().remove(sizeOfA3));      // then remove from A2 and add to A3
                     }
                     if (A2.getCars().size() >= sizeOfA3) {         // check in A2 if there is further more car which belongs to A3
                         removeFromA2(time);                        // the method is called again
@@ -268,7 +268,7 @@ public class Main {
         if (A2.getCars().size() <= sizeOfA3) {                      // if size of A2 is smaller then no need to car of A3 in A2
             A2.removeCar(time);                                      // simply try to remove a car from A2
         } else {
-            if (A2.getCars().get(3).whichLane.equals(A3.laneName)){     // otherwise check at position 3 if there is car from A3 waiting
+            if (A2.getCars().get(sizeOfA3).whichLane.equals(A3.laneName)){     // otherwise check at position 3 if there is car from A3 waiting
                 removeFromA2(time);
             } else {
                 A2.removeCar(time);                                     // if not simply try to remove a car from A2
