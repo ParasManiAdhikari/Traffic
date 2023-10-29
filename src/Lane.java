@@ -8,7 +8,7 @@ public class Lane {
     double probablityToAdd;
     int totalCar = 0;
 
-    int carNumber = 0;
+    int carNumber = 1;
 
 
     // Constructor
@@ -28,19 +28,16 @@ public class Lane {
     public LinkedList<Car> getCars() {
         return cars;
     }
-    public void addCar(String laneName, int time) {
-        Random random = new Random();
-        double generatedProbablity = random.nextDouble();
-        if (generatedProbablity < this.probablityToAdd) {
-            cars.add(new Car("car" + carNumber++,laneName, time));
-            totalCar++;
-        }
+    public void addCar(String laneName, int time, int a3Last) {
+        cars.addLast(new Car("carfromA3-car" + a3Last, laneName, time));
+        totalCar++;
     }
     public boolean addOrNot() {
         Random random = new Random();
         double generatedProbablity = random.nextDouble();
         if (generatedProbablity < this.probablityToAdd) {
             System.out.print("Probability at " + laneName + ": " + new DecimalFormat("#.##").format(generatedProbablity) + " < " + this.probablityToAdd);
+            System.out.print(" ✔");
             return true;
         } else {
             System.out.print("Probability at " + laneName + ": " + new DecimalFormat("#.##").format(generatedProbablity) + " < " + this.probablityToAdd);
@@ -52,7 +49,6 @@ public class Lane {
         if (addOrNot()){
             cars.add(new Car("car" + carNumber++,this.laneName, time));
             totalCar++;
-            System.out.print(" ✔");
         }
         System.out.println();
 
@@ -84,5 +80,4 @@ public class Lane {
             return false;
         }
     }
-
 }
