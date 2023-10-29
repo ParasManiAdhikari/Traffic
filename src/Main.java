@@ -56,7 +56,7 @@ public class Main {
 
     }
 
-    private static void printAllAverageRemainingCars(){
+    private static void printAllAverageRemainingCars(){                     // Show the average remaining cars from all Simulations
         System.out.println("1b) --------------- Remaining Cars");
 //        System.out.println("Remaining cars at A1 :" + remainingCarsA1);
         System.out.println("Average: " + calculateAverage(remainingCarsA1));
@@ -75,7 +75,7 @@ public class Main {
 
     }
 
-    private static void saveRemainingCars() {
+    private static void saveRemainingCars() {                               // Get number of cars of each Lane and add them to Lists
         remainingCarsA1.add((double) A1.totalCar);
         remainingCarsA2.add((double) A2.totalCar);
         remainingCarsA3.add((double) A3.totalCar);
@@ -97,7 +97,7 @@ public class Main {
         System.out.println();
     }
 
-    private static void printLanes() {
+    private static void printLanes() {      // Print Lanes with their Cars
         System.out.println("--lanes--");
         printCars(A1.getCars(), A1.laneName);
         printCars(A2.getCars(), A2.laneName);
@@ -108,7 +108,7 @@ public class Main {
         printCars(D1.getCars(), D1.laneName);
     }
 
-    private static void saveDwellTimes() {
+    private static void saveDwellTimes() {  // Save Dwell Times for One Simulation
         dwellA1.add(getDwellTimes(A1));
         dwellA2.add(getDwellTimes(A2));
         dwellA3.add(getDwellTimes(A3));
@@ -118,7 +118,7 @@ public class Main {
         dwellD1.add(getDwellTimes(D1));
     }
 
-    private static void printAllAverageDwellTimes() {
+    private static void printAllAverageDwellTimes() {   // Print Average Dwell Times
         System.out.println("\nANSWERS: \n1a) --------------- DWELL TIME");
 //        System.out.print(dwellA1);
         System.out.println(" | Average :" + calculateAverage(dwellA1));
@@ -136,7 +136,7 @@ public class Main {
         System.out.println(" | Average :" + calculateAverage(dwellD1));
     }
 
-    public static String calculateAverage(List<Double> numbers) {
+    public static String calculateAverage(List<Double> numbers) {   // Calculate Average value of a List
         double a = numbers.stream()
                 .mapToDouble(Double::doubleValue)
                 .average()
@@ -145,7 +145,7 @@ public class Main {
         return new DecimalFormat("#.##").format(a);
     }
 
-    private static void resetLanes() {
+    private static void resetLanes() {                              // Reset Lanes to their original Values
         A1 =  new Lane("A1", 0.25);
         A2 =  new Lane("A2", 0.25);
         A3 =  new Lane("A3", 0.07);
@@ -155,37 +155,37 @@ public class Main {
         D1 =  new Lane("D1", 0.07);
     }
 
-    private static double getDwellTimes(Lane lane) {
-        if(lane.exitedCars.size() != 0){
+    private static double getDwellTimes(Lane lane) {                                // Get Dwell Time of each Lane
+        if(lane.exitedCars.size() != 0){                                            // Make sure exitedCars is not empty
             int LaneDwellTimeSum = 0;
-            for(Car car : lane.exitedCars){
-                int dwellTime = car.exitTime - car.enterTime;
+            for(Car car : lane.exitedCars){                                         // Iterate every car
+                int dwellTime = car.exitTime - car.enterTime;                       // Calculate its dwell time
 //            System.out.print(dwellTime + " | ");
-                LaneDwellTimeSum += dwellTime;
+                LaneDwellTimeSum += dwellTime;                                      // Add it to the Sum
             }
 //        System.out.println();
-            double averageDwellTime = LaneDwellTimeSum / lane.exitedCars.size();
+            double averageDwellTime = LaneDwellTimeSum / lane.exitedCars.size();    // Sum / No.of Cars
             return averageDwellTime;
         }
-        return 0;
+        return 0;                                                                   // Return 0 if exitedCars is empty
     }
 
     public static void addToA3(int time) {
 
-        if (A2.getCars().size() < sizeOfA3){             // If A2 has < 3 elements a car go to A3
-            if (A3.getCars().size() < sizeOfA3){          // if A3 is not full then add to A3
+        if (A2.getCars().size() < sizeOfA3){                                        // If A2 has < 3 elements a car go to A3
+            if (A3.getCars().size() < sizeOfA3){                                    // if A3 is not full then add to A3
                 A3.addCar(time);
             }
-        } else {                                       // otherwise
-            if (A3.addOrNot()){                        // if a car really meet the probablity of A3 then we will add it to A2
-                A2.addCar(A3.laneName,time,A3.carNumber);            // but we will remember that its belong to A3
+        } else {                                                                    // otherwise
+            if (A3.addOrNot()){                                                     // if a car really meet the probablity of A3 then we will add it to A2
+                A2.addCar(A3.laneName,time,A3.carNumber);                           // but we will remember that its belong to A3
             }
             System.out.println();
         }
     }
 
-    private static void addToA2(int time) {                     // this method add an element of A2 to either A2 or A1
-        if (A2.getCars().size() <= A1.getCars().size()) {       // based on smaller size of the lane
+    private static void addToA2(int time) {                                          // this method add an element of A2 to either A2 or A1
+        if (A2.getCars().size() <= A1.getCars().size()) {                            // based on smaller size of the lane
             A2.addCar(time);
         } else {
             System.out.print("A2 -> A1 : ");
@@ -194,8 +194,8 @@ public class Main {
     }
 
     private static void addToC2(int time) {
-        if (C2.getCars().size() < C1.getCars().size()) {                 // this method add an element of C2 to either C2 or C1
-            C2.addCar(time);                                             // based on smaller size of the lane
+        if (C2.getCars().size() < C1.getCars().size()) {                            // this method add an element of C2 to either C2 or C1
+            C2.addCar(time);                                                        // based on smaller size of the lane
         } else {
             C1.addCar(time);
         }
