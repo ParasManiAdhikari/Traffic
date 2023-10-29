@@ -52,26 +52,6 @@ public class Main {
             resetLanes();                    // Resets Lanes for next Simulation
         }
         printAllAverageDwellTimes();
-        //            System.out.println("----------------- DWELL TIME -------------");
-//            System.out.println("A1 : " + A1.exitedCars);
-//            System.out.println("AVG DWELL TIME OF A1: " + getDwellTimes(A1));
-//            System.out.println("A2 : " + A2.exitedCars);
-//            System.out.println("AVG DWELL TIME OF A2: " + getDwellTimes(A2));
-//            System.out.println("A3 : " + A3.exitedCars);
-//            System.out.println("AVG DWELL TIME OF A3: " + getDwellTimes(A3));
-//            System.out.println("AVG DWELL TIME OF B1: " + getDwellTimes(B1));
-//            System.out.println("AVG DWELL TIME OF C1: " + getDwellTimes(C1));
-//            System.out.println("AVG DWELL TIME OF C2: " + getDwellTimes(C2));
-//            System.out.println("AVG DWELL TIME OF D1: " + getDwellTimes(D1));
-//
-//            System.out.println("---------- Cars Left At the End --------");
-//            System.out.println("TOTAL CARS A1: " + A1.totalCar);
-//            System.out.println("TOTAL CARS A2: " + A2.totalCar);
-//            System.out.println("TOTAL CARS A3: " + A3.totalCar);
-//            System.out.println("TOTAL CARS B1: " + B1.totalCar);
-//            System.out.println("TOTAL CARS C1: " + C1.totalCar);
-//            System.out.println("TOTAL CARS C2: " + C2.totalCar);
-//            System.out.println("TOTAL CARS D1: " + D1.totalCar);
         printAllAverageRemainingCars();
 
     }
@@ -140,19 +120,19 @@ public class Main {
 
     private static void printAllAverageDwellTimes() {
         System.out.println("\nANSWERS: \n1a) --------------- DWELL TIME");
-//        System.out.print(dwellA1);
+        System.out.print(dwellA1);
         System.out.println(" | Average :" + calculateAverage(dwellA1));
-//        System.out.print(dwellA2);
+        System.out.print(dwellA2);
         System.out.println(" | Average :" + calculateAverage(dwellA2));
-//        System.out.print(dwellA3);
+        System.out.print(dwellA3);
         System.out.println(" | Average :" + calculateAverage(dwellA3));
-//        System.out.print(dwellB1);
+        System.out.print(dwellB1);
         System.out.println(" | Average :" + calculateAverage(dwellB1));
-//        System.out.print(dwellC1);
+        System.out.print(dwellC1);
         System.out.println(" | Average :" + calculateAverage(dwellC1));
-//        System.out.print(dwellC2);
+        System.out.print(dwellC2);
         System.out.println(" | Average :" + calculateAverage(dwellC2));
-//        System.out.print(dwellD1);
+        System.out.print(dwellD1);
         System.out.println(" | Average :" + calculateAverage(dwellD1));
     }
 
@@ -279,7 +259,7 @@ public class Main {
                     if (A3.getCars().size() < sizeOfA3) {
                         A3.addCar(A2.getCars().remove(3));
                     }
-                    if (A2.getCars().size() == sizeOfA3) {
+                    if (A2.getCars().size() >= sizeOfA3) {
                         removeFromA2(time);
                     } else {
                         A2.removeCar(time);
