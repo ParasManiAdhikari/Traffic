@@ -178,7 +178,7 @@ public class Main {
             }
         } else {                                                                    // otherwise
             if (A3.addOrNot()){                                                     // if a car really meet the probablity of A3 then we will add it to A2
-                A2.addCar(A3.laneName,time,A3.carNumber);                           // but we will remember that its belong to A3
+                A2.addCar(A3.laneName,time,A3.carNumber++);                           // but we will remember that its belong to A3
             }
             System.out.println();
         }
