@@ -239,14 +239,14 @@ public class Main {
     public static void removeFromA2(int time) {
         if (A2.getCars().size() > sizeOfA3) {
             if (A2.getCars().get(sizeOfA3).whichLane.equals(A3.laneName)) {         // if there is car waiting at position 3 to go to A3
-                if (A2.getCars().get(sizeOfA3 -1).whichLane.isEmpty()) {               // and before it there is space
+                if (A2.getCars().get(sizeOfA3 -1).whichLane.isEmpty()) {            // and before it there is space
                     if (A3.getCars().size() < sizeOfA3) {                           // and A3 is not full
                         A3.addCar(A2.getCars().remove(sizeOfA3));                   // then remove from A2 and add to A3
-                        if (A2.getCars().size() >= sizeOfA3) {                          // check in A2 if there is further more car which belongs to A3
-                            removeFromA2(time);                                         // the method is called again
+                        if (A2.getCars().size() >= sizeOfA3) {                      // check in A2 if there is further more car which belongs to A3
+                            removeFromA2(time);                                     // the method is called again
                         }
                     }
-                    else {                                                        // if size is not greater than 3
+                    else {                                                          // if size is not greater than 3
                         A2.removeCar(time);                                         // it means there is no chance to find car which belongs to A3
                         // so try to remove a car from A2
                     }
