@@ -246,9 +246,9 @@ public class Main {
                             removeFromA2(time);                                     // the method is called again
                         }
                     }
-                    else {                                                          // if size is not greater than 3
+                    else {
                         A2.removeCar(time);                                         // it means there is no chance to find car which belongs to A3
-                        // so try to remove a car from A2
+                                                                                    // so try to remove a car from A2
                     }
                 } else {                                                            // if there is no space infront of it then try to remove a car from A2
                     if (A2.removeCar(time)) {                                       // if a car is removed then  make an space at place 2
